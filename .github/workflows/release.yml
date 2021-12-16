@@ -1,0 +1,27 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - v[0-9]+
+      - "**beta"
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    concurrency:
+      group: release
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Semantic Release
+        run: >-
+          npx
+          --package @semantic-release/changelog@^6
+          --package @semantic-release/git@^10
+          --package semantic-release@^18
+          semantic-release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
