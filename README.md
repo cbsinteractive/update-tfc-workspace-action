@@ -38,7 +38,7 @@ Set description, working directory and VCS repository in one step:
 
 ```yaml
 - name: Update workspace settings
-    uses: cbsinteractive/update-tfc-workspace-action@v1
+    uses: cbsinteractive/update-tfc-workspace-action@v2
     with:
         tfcToken: ${{ secrets.tfc_org_token }}
         orgName: ${{ secrets.tfc_org }}
@@ -53,8 +53,8 @@ Set description, working directory and VCS repository in one step:
 Unset VCS repository:
 
 ```yaml
-- name: Update workspace settings
-    uses: cbsinteractive/update-tfc-workspace-action@v1
+- name: Detach workspace VCS repo
+    uses: cbsinteractive/update-tfc-workspace-action@v2
     with:
         tfcToken: ${{ secrets.tfc_org_token }}
         orgName: ${{ secrets.tfc_org }}
