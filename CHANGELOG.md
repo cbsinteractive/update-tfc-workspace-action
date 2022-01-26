@@ -1,3 +1,18 @@
+# [2.0.0](https://github.com/cbsinteractive/update-tfc-workspace-action/compare/1.0.0...2.0.0) (2022-01-26)
+
+
+### Features
+
+* Support setting individual workspace properties ([cc3c61d](https://github.com/cbsinteractive/update-tfc-workspace-action/commit/cc3c61d61a9ce1d2dcc2f4330925da7c55e5c56a))
+
+
+### BREAKING CHANGES
+
+* `description`, `vcsIdentifier`, `vcsBranch`,
+`vcsOAuthTokenID`, and `workingDirectory` input variables have been
+replaced by corresponding `set*` and `unset*` versions. See README.md
+for details and examples of current calling conventions.
+
 # 1.0.0 (2021-12-16)
 
 
