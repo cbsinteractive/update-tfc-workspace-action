@@ -8,5 +8,11 @@ module.exports = {
     "@semantic-release/git",
     "@semantic-release/github",
   ],
-  branches: ["v1"],
+  branches: [
+    {
+      name: "v1",
+      range: "1.x",
+    },
+    "v2",
+  ],
 };

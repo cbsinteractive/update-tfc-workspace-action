@@ -4,50 +4,63 @@ inputs:
   tfcToken:
     description: A Terraform Cloud API token with access to manage workspaces
     required: true
+
   orgName:
     description: The name of the Terraform Cloud organization in which to create the workspace
     required: true
+
   workspaceName:
     description: The name of the Terraform Cloud workspace
     required: true
-  description:
-    description: The workspace description
-    required: true
-  vcsIdentifier:
-    description: The VCS repo to connect, e.g. some-org/some-repo
-    required: true
-  vcsBranch:
-    description: The VCS repo branch to connect
-    required: true
-  vcsOAuthTokenID:
-    description: The OAuth token ID used to authorize the connection
-    required: true
-  workingDirectory:
-    description: The directory that Terraform will execute within
-    required: true
+
+  setDescription:
+    description: Set the workspace description
+    required: false
+
+  setVCSIdentifier:
+    description: Set the VCS repo to connect, e.g. some-org/some-repo
+    required: false
+
+  setVCSBranch:
+    description: Set the VCS repo branch to connect
+    required: false
+
+  setVCSOAuthTokenID:
+    description: Set the OAuth token ID used to authorize the connection
+    required: false
+
+  setWorkingDirectory:
+    description: Set the directory that Terraform will execute within
+    required: false
+
+  unsetDescription:
+    description: Unset the workspace description
+    required: false
+    default: false
+
+  unsetVCSIdentifier:
+    description: Unset the VCS repo to connect, e.g. some-org/some-repo
+    required: false
+    default: false
+
+  unsetVCSBranch:
+    description: Unset the VCS repo branch to connect
+    required: false
+    default: false
+
+  unsetVCSOAuthTokenID:
+    description: Unset the OAuth token ID used to authorize the connection
+    required: false
+    default: false
+
+  unsetWorkingDirectory:
+    description: Unset the directory that Terraform will execute within
+    required: false
+    default: false
 
 runs:
   using: docker
-  image: docker://frostedcarbon/tfc-cli:v0.10.0
-  args:
-    - workspaces
-    - update
-    - -token
-    - ${{ inputs.tfcToken }}
-    - -org
-    - ${{ inputs.orgName }}
-    - -workspace
-    - ${{ inputs.workspaceName }}
-    - -description
-    - ${{ inputs.description }}
-    - -vcs-identifier
-    - ${{ inputs.vcsIdentifier }}
-    - -vcs-branch
-    - ${{ inputs.vcsBranch }}
-    - -vcs-oauth-token-id
-    - ${{ inputs.vcsOAuthTokenID }}
-    - -working-directory
-    - ${{ inputs.workingDirectory }}
+  image: Dockerfile
 
 branding:
   icon: arrow-up-right
