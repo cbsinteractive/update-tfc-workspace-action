@@ -1,4 +1,4 @@
-name: Update Terraform Cloud Workspace
+name: Update TFC Workspace
 description: Updates a Terraform Cloud workspace settings
 inputs:
   tfcToken:
