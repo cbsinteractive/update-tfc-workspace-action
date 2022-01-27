@@ -1,3 +1,10 @@
+# [2.3.0](https://github.com/cbsinteractive/update-tfc-workspace-action/compare/2.2.0...2.3.0) (2022-01-27)
+
+
+### Features
+
+* Rename action ([e78709c](https://github.com/cbsinteractive/update-tfc-workspace-action/commit/e78709c9b97701d2b2a7b5c4a27e544d1a325e98))
+
 # [2.2.0](https://github.com/cbsinteractive/update-tfc-workspace-action/compare/2.1.0...2.2.0) (2022-01-27)
 
 
