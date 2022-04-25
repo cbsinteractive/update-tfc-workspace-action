@@ -1,3 +1,10 @@
+## [2.4.1](https://github.com/cbsinteractive/update-tfc-workspace-action/compare/2.4.0...2.4.1) (2022-04-25)
+
+
+### Bug Fixes
+
+* Call tfc-cli set-auto-apply properly ([2550856](https://github.com/cbsinteractive/update-tfc-workspace-action/commit/25508562b0c4e127a32c8c10f151efcda9987a28))
+
 # [2.4.0](https://github.com/cbsinteractive/update-tfc-workspace-action/compare/2.3.0...2.4.0) (2022-04-25)
 
 
