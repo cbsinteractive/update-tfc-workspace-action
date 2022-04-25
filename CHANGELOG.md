@@ -1,3 +1,10 @@
+## [2.4.3](https://github.com/cbsinteractive/update-tfc-workspace-action/compare/2.4.2...2.4.3) (2022-04-25)
+
+
+### Bug Fixes
+
+* Invalid syntax in action.yml ([88dcac3](https://github.com/cbsinteractive/update-tfc-workspace-action/commit/88dcac36fdfb4268867d2938d52040b4519d8f09))
+
 ## [2.4.2](https://github.com/cbsinteractive/update-tfc-workspace-action/compare/2.4.1...2.4.2) (2022-04-25)
 
 
