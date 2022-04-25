@@ -1,3 +1,10 @@
+# [2.4.0](https://github.com/cbsinteractive/update-tfc-workspace-action/compare/2.3.0...2.4.0) (2022-04-25)
+
+
+### Features
+
+* Add setApplyMethod option ([9bc6e0a](https://github.com/cbsinteractive/update-tfc-workspace-action/commit/9bc6e0a5490bd9beec5a8b12b0efc051518be674))
+
 # [2.3.0](https://github.com/cbsinteractive/update-tfc-workspace-action/compare/2.2.0...2.3.0) (2022-01-27)
 
 
