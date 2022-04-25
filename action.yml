@@ -33,6 +33,10 @@ inputs:
     description: Set the directory that Terraform will execute within
     required: false
 
+  setApplyMethod:
+    description: The workspace apply method. Allowed values: auto, manual
+    required: false
+
   unsetDescription:
     description: Unset the workspace description
     required: false
