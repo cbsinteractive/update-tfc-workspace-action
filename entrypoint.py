@@ -4,7 +4,7 @@ from collections.abc import Iterable, Mapping
 from distutils.util import strtobool
 from itertools import groupby
 from operator import attrgetter
-from typing import Optional
+from typing import Any, Callable, Optional
 
 
 class VariableSpec:
@@ -16,6 +16,9 @@ class VariableSpec:
         cli_variable: str = None,
         mutually_exclusive_vars: Iterable[str] = (),
         mutually_necessary_vars: Iterable[str] = (),
+        data_type: type = None,
+        allowed_values: Iterable[str] = (),
+        from_value_fun: Callable[[Any], Any] = None,
     ) -> None:
         self.__action_variable = action_variable
         assert variable_type in ["set", "unset", None]
@@ -24,11 +27,16 @@ class VariableSpec:
         self.__cli_variable = cli_variable
         self.__mutually_exclusive_vars = mutually_exclusive_vars
         self.__mutually_necessary_vars = mutually_necessary_vars
+        self.__data_type = data_type
+        self.__allowed_values = allowed_values
+        self.__from_value_fun = from_value_fun
 
     def __repr__(self) -> str:
         return (
             f"VariableSpec(action_variabler={self.__action_variable}"
-            f",cli_subcommand={self.__cli_subcommand},variable_type={self.__variable_type})"
+            f",cli_subcommand={self.__cli_subcommand}"
+            f",variable_type={self.__variable_type}"
+            f",data_type={self.__data_type})"
         )
 
     @property
@@ -54,6 +62,17 @@ class VariableSpec:
     @property
     def mutually_necessary_vars(self):
         return self.__mutually_necessary_vars
+
+    @property
+    def data_type(self):
+        return self.__data_type
+
+    @property
+    def allowed_values(self):
+        return self.__allowed_values
+
+    def from_value(self, value):
+        return self.__from_value_fun(value)
 
     @property
     def env_var(self):
@@ -99,6 +118,13 @@ def validate_inputs(
         if not _is_variable_specified(corresponding_var, runtime_settings):
             raise Exception("setVCS* variables are mutually necessary")
 
+    if len(source_var.allowed_values) > 0:
+        value = runtime_settings[source_var.action_variable]
+        assert value in source_var.allowed_values, (
+            f"Error validating {source_var.cli_subcommand}"
+            f" {source_var.cli_variable}: {value} not found in {source_var.allowed_values}"
+        )
+
 
 def _get_variable_spec(name: str, variables: Iterable[VariableSpec]) -> VariableSpec:
     return next(x for x in variables if x.action_variable == name)
@@ -123,7 +149,17 @@ def _get_variable_specs() -> list[VariableSpec]:
             None,
             ("setDescription",),
         ),
-        VariableSpec("setApplyMethod", "set", "set-apply-method", "-method"),
+        VariableSpec(
+            "setApplyMethod",
+            "set",
+            "set-auto-apply",
+            "-auto-apply",
+            (),
+            (),
+            bool,
+            ("auto", "manual"),
+            lambda x: "true" if x == "auto" else "false",
+        ),
         VariableSpec(
             "setWorkingDirectory",
             "set",
@@ -235,9 +271,17 @@ def _gather_cmd_args(
         ]
         for var_spec in var_specs:
             if var_spec.variable_type == "set":
-                result.extend(
-                    (var_spec.cli_variable, runtime_settings[var_spec.action_variable])
-                )
+                if var_spec.data_type == bool:
+                    result.append(
+                        f"{var_spec.cli_variable}={var_spec.from_value(runtime_settings[var_spec.action_variable])}"
+                    )
+                else:
+                    result.extend(
+                        (
+                            var_spec.cli_variable,
+                            runtime_settings[var_spec.action_variable],
+                        )
+                    )
         yield result
 
 

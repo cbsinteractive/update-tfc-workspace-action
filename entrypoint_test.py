@@ -303,14 +303,43 @@ def test_can_set_apply_method_to_auto(check_call):
         [
             "/tfc-cli",
             "workspaces",
-            "set-apply-method",
+            "set-auto-apply",
             "-token",
             "some-token",
             "-org",
             "some-org",
             "-workspace",
             "some-workspace",
-            "-method",
-            "auto",
+            "-auto-apply=true",
+        ]
+    )
+
+
+@patch("entrypoint.subprocess.check_call")
+def test_can_set_apply_method_to_manual(check_call):
+    # Code under test
+    with patch.dict(
+        os.environ,
+        _make_environment_variables(
+            {
+                "INPUT_SETAPPLYMETHOD": "manual",
+            }
+        ),
+        clear=True,
+    ):
+        run()
+
+    check_call.assert_called_with(
+        [
+            "/tfc-cli",
+            "workspaces",
+            "set-auto-apply",
+            "-token",
+            "some-token",
+            "-org",
+            "some-org",
+            "-workspace",
+            "some-workspace",
+            "-auto-apply=false",
         ]
     )
