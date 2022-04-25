@@ -1,3 +1,10 @@
+## [2.4.2](https://github.com/cbsinteractive/update-tfc-workspace-action/compare/2.4.1...2.4.2) (2022-04-25)
+
+
+### Bug Fixes
+
+* Add setApplyMethod to actoin.yml ([c54144a](https://github.com/cbsinteractive/update-tfc-workspace-action/commit/c54144a3cd0fe83a7697f884fd9c87c1d777bd08))
+
 ## [2.4.1](https://github.com/cbsinteractive/update-tfc-workspace-action/compare/2.4.0...2.4.1) (2022-04-25)
 
 
