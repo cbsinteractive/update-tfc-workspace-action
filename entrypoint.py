@@ -123,6 +123,7 @@ def _get_variable_specs() -> list[VariableSpec]:
             None,
             ("setDescription",),
         ),
+        VariableSpec("setApplyMethod", "set", "set-apply-method", "-method"),
         VariableSpec(
             "setWorkingDirectory",
             "set",

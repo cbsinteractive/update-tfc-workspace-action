@@ -18,6 +18,7 @@ The action expects the following inputs:
 | `setVCSIdentifier`      | No       | string  |         | The VCS repo to connect, e.g. some-org/some-repo                            |
 | `setVCSBranch`          | No       | string  |         | The VCS repo branch to connect                                              |
 | `setVCSOAuthTokenID`    | No       | string  |         | The OAuth token ID used to authorize the connection                         |
+| `setApplyMethod`        | No       | string  | manual  | The workspace apply method. Allowed values: auto, manual                    |
 | `unsetDescription`      | No       | boolean | false   | Unset the workspace description                                             |
 | `unsetWorkingDirectory` | No       | boolean | false   | Unset the directory that Terraform will execute within                      |
 | `unsetVCSIdentifier`    | No       | boolean | false   | Unset the VCS repo to connect, e.g. some-org/some-repo                      |

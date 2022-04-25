@@ -16,6 +16,7 @@ def _make_environment_variables(overrides):
         "INPUT_SETVCSIDENTIFIER": "",
         "INPUT_SETVCSBRANCH": "",
         "INPUT_SETVCSOAUTHTOKENID": "",
+        "INPUT_SETAPPLYMETHOD": "",
         # GitHub Action presents unset options as "false" if not given
         "INPUT_UNSETDESCRIPTION": "false",
         "INPUT_UNSETWORKINGDIRECTORY": "false",
@@ -282,3 +283,34 @@ def test_vcs_settings_are_mutually_necessary(check_call):
 
         check_call.assert_not_called()
         assert "setVCS* variables are mutually necessary" in str(excinfo.value)
+
+
+@patch("entrypoint.subprocess.check_call")
+def test_can_set_apply_method_to_auto(check_call):
+    # Code under test
+    with patch.dict(
+        os.environ,
+        _make_environment_variables(
+            {
+                "INPUT_SETAPPLYMETHOD": "auto",
+            }
+        ),
+        clear=True,
+    ):
+        run()
+
+    check_call.assert_called_with(
+        [
+            "/tfc-cli",
+            "workspaces",
+            "set-apply-method",
+            "-token",
+            "some-token",
+            "-org",
+            "some-org",
+            "-workspace",
+            "some-workspace",
+            "-method",
+            "auto",
+        ]
+    )
